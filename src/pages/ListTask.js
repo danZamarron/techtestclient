@@ -5,8 +5,15 @@ import { AppContext } from "../context"
 import AddTask from "../components/AddTask"
 import {deleteTaskService, doneTaskService } from "../services/task"
 
+let baseURL;
 
-const url = "http://localhost:4000/api/task"
+
+process.env.NODE_ENV === "production"
+  ? (baseURL = "/")
+  : (baseURL = process.env.REACT_APP_LOCALHOST)
+
+
+const url = `${baseURL}api/task`
 const fetcher = url => fetch(url).then(res => res.json());
 
 const { Column } = Table;
